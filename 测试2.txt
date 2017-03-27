@@ -13,3 +13,14 @@ Sass sass/index.scss css/index.css
 返回当前目录
 Sass --watch sass/index.scss:css/index.css(监听文件)
 Sass --watch
+
+Git指令
+
+Git reset --hard HEAD-1 回滚上一个版本
+Git clone 服务器仓库地址（一次）
+
+从本地推送到服务器的操作流程：
+1.Git add .
+2.Git commit -m ‘提交信息’
+  Git pull 将服务器的版本拉去下来到本地
+3.Git push 推送}
