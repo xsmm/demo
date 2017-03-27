@@ -1,0 +1,15 @@
+命令行指令：
+cd         进入文件夹
+Dir         显示当前目录下的文件
+Md        创建文件夹
+Copy nul    创建文件
+Cd..        返回上层目录
+Cd/        返回根目录
+Ctrl+c双击  停止运行
+
+
+Sass命令执行
+Sass sass/index.scss css/index.css
+返回当前目录
+Sass --watch sass/index.scss:css/index.css(监听文件)
+Sass --watch
