@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>发票索取</title>
+
+	</head>
+	<script src="libs/jquery-3.1.1.js"></script>
+	<script src="libs/laydate/laydate.js"></script>
+	<style rel="stylesheet">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		
+		html {
+			width: 100%;
+			font-size: 16px;
+		}
+		
+		body {
+			width: 100%;
+			font-family: "微软雅黑";
+		}
+		
+		li {
+			list-style: none;
+		}
+		
+		a {
+			color: black;
+			text-decoration: none;
+		}
+		
+		.wrap {
+			width: 99%;
+			margin: 0 auto;
+		}
+		/*整体属性............................................*/
+		
+		.header {
+			width: 96%;
+			height: 70px;
+			margin: 0 auto;
+			border-bottom: solid 1px rgb(217, 222, 228);
+			position: relative;
+		}
+		
+		.header_one {
+			border-left: solid 3px rgb(136, 183, 224);
+			position: relative;
+			top: 16px;
+		}
+		
+		.header_one span {
+			font-size: 14px;
+			margin-left: 10px;
+		}
+		/*header属性....................*/
+		/*.nav{
+			width: 96%;
+			height: 40px;
+			border-bottom:#1F3959 solid 1px ;
+			margin: 0 auto;
+			margin-top: 25px;
+		}
+		
+		.tab li {
+				float: left;
+				background: rgb(251,250,248);
+				width: 70px;
+				height: 40px;
+				color: #666666;
+				line-height: 40px;
+				text-align: center;
+				font-size: 14px;
+				
+			}
+			.tab .choosed {
+				background: #fff;
+			}
+			
+			#indicator {
+				position: absolute;
+				left:15px;
+				top:96px;
+				width: 5px;
+				height: 3px;
+				background: rgb(0,160,199);
+				transition: all ;
+			}*/
+		/*nav属性*/
+		
+		.content {
+			width: 96%;
+			margin: 0 auto;
+			margin-top: 25px;
+			overflow: hidden;
+		}
+		
+		.AA{
+			width: 100%;
+			height: 25px;
+			margin: 0 auto;	
+		}
+		.BB li{
+			display: inline-block;
+			float: left;
+			font-size: 12px;
+			line-height: 24px;
+		}
+		.aa{
+			width: 48%;
+			height: 24px;
+			background: rgb(0,160,199);
+			color: white;
+			text-align: center;
+		}
+		.bb{
+			
+		    border-top: 12px solid transparent !important;
+            border-left: 12px solid rgb(0,160,199);
+            border-bottom: 12px solid transparent !important;
+            background-color: #FFF;     
+		}
+		.dd{
+			
+			border-top: 12px solid rgb(202,202,202);
+		    border-left: 12px solid transparent !important;
+		    border-bottom: 12px solid rgb(202,202,202);
+		    margin-left: -8px;
+		}
+		.cc{
+			width: 50%;
+			height: 24px;
+			color: white;
+			background: rgb(202,202,202);
+			text-align: center;
+		}
+		/*content_left_one属性*/
+		
+		.content_left_two {
+			width: 99.8%;
+			background: rgb(249, 249, 249);
+			margin-top: 17px;
+			margin-bottom: 5px;
+			border: solid 1px rgb(221, 221, 221);
+		}
+		
+		.content_left_two:after {
+			display: block;
+			content: "";
+			clear: both;
+		}
+		
+		.content_left_two span {
+			float: left;
+			font-size: 12px;
+			display: inline-block;
+			padding: 10px 0 0 15px;
+		}
+		
+		.content_left_two_1 {
+			display: inline-block;
+			float: left;
+			font-size: 12px;
+			padding: 10px 0 10px 10px;
+		}
+		
+		.content_left_two_1 a {
+			color: rgb(0, 51, 153);
+		}
+		
+		.content_left_two_1 a:hover {
+			text-decoration: underline;
+		}
+		
+		.content_left_two_xinzeng {
+			font-size: 12px;
+			border-bottom: 1px dashed #666666;
+			padding: 10px 15px;
+		}
+		/*content_left_two属性*/
+		
+		.content_left_three {
+			width: 99.5%;
+			height: 40px;
+			background: rgb(245, 246, 250);
+			border: solid 1px rgb(221, 221, 221);
+			border-left: 5px solid rgb(109, 119, 129);
+			
+		}
+		
+		.content_left_three span {
+			font-size: 12px;
+			line-height: 40px;
+			margin-left: 15px;
+		}
+		
+		.content_dianji {
+			width: 40px;
+			height: 40px;
+			border-left: solid 1px rgb(221, 221, 221);
+			float: right;
+		}
+		/*content_left_three属性*/
+		
+		.content_left_four {
+			width: 100%;
+		}
+		/*content_left_four属性*/
+		
+		
+		
+		.content_left_four_1 {
+			width: 100%;
+			background: white;
+		}
+		
+		.content_left_four_2 {
+			width: 100%;
+			height: 96px;
+			background: rgb(245, 246, 250);
+			border-bottom: 1px solid rgb(221, 221, 221);
+			border-top: 1px solid rgb(221, 221, 221);
+			font-size: 12px;
+			color: #666666;
+		}
+		
+		.left_four_2_left {
+			float: left;
+			padding: 30px 0 0 20px;
+		}
+		
+		.left_four_2_right {
+			float: left;
+			text-align: right;
+			padding: 0 30px 0 0;
+		}
+		
+		.left_four_2_button1 {
+			width: 82px;
+			height: 32px;
+			background: #6D7781;
+			border: none;
+			float: right;
+			color: white;
+			font-size: 12px;
+		}
+		
+		.left_four_2_conghe {
+			float: right;
+			padding: 25px 20px 0 0;
+		}
+		
+		.conten_time {
+			float: left;
+			font-size: 12px;
+			line-height: 48px;
+			color: #666666;
+			padding: 0 0 0 10px;
+		}
+		
+		.conten_number {
+			float: left;
+			font-size: 12px;
+			line-height: 48px;
+			color: #666666;
+			padding: 0 0 0 10px;
+		}
+		
+		.content_source {
+			float: left;
+			font-size: 12px;
+			line-height: 50px;
+			color: #666666;
+		}
+		
+		.content_source span {
+			padding: 0 0 0 10px;
+		}
+		
+		.content_submit {
+			width: 58px;
+			height: 23px;
+			float: left;
+			margin-left: 20px;
+			margin-top: 12px;
+			font-size: 12px;
+			color: #666666;
+		}
+		
+		.content_left_four_1:after {
+			display: block;
+			content: "";
+			clear: both;
+		}
+		/*content_left_four 属性*/
+		
+		.content_left_five {
+			width: 100%;
+			height: 36px;
+			font-size: 14px;
+			line-height: 50px;
+			
+		}
+		
+		.content_left_five a {
+			color: #666666;
+		}
+		
+		.content_left_five a:hover {
+			text-decoration: underline;
+			color: rgb(0, 51, 153);
+		}
+		
+		.content_left_five_1 {
+			float: left;
+			margin-left: 10px;
+		}
+		.content_left_five_1 a{
+			font-size: 12px;
+			
+		}
+		.content_left_five_2 {
+			
+			float: right;
+			margin-right: 10px;
+		}
+		.content_left_five_2 button{
+			font-size: 10px;
+			padding: 3px 5px;
+		}
+		/*content_left_five属性*/
+		
+		
+		table{
+				width:100%;
+				color:black;
+				text-align: left;
+			}
+		
+		.conten_bottom{
+			margin-top:20px;
+			font-size: 12px;
+			border: 1px solid rgb(221, 221, 221);
+			border-top: none;
+		}
+			
+		.conten_bottom th,.conten_bottom .content  td{
+			 	font-weight: normal;
+				padding:8px 8px;
+				font-size: 12px;
+		}
+		.conten_bottom .title{
+				color: #666;
+		}
+		.conten_bottom td{
+				border-top:  1px solid #e1e6eb;
+				padding: 15px 8px;
+				
+		}
+		.conten_bottom a:hover{
+			color: rgb(35,213,210);
+		}
+		/*content_left_six属性*/
+		/*content属性.................................*/
+	</style>
+
+	<body>
+		<div class="wrap">
+			<div class="header">
+				<div class="header_one"><span>发票索取</span></div>
+			</div>
+
+			<!--<div class="nav">
+				<ul class="tab">
+					<li>阿里云</li>
+					<li>云市场</li>
+			    </ul>
+				<div id="indicator"></div>
+			</div>-->
+
+			<div class="content">
+				<li class="content_left">
+					<div class="content_left_one">
+						<div class="AA">
+							<ul class="BB">
+								<li class="aa">1.开票订单、月结算单选择</li>
+								<li class="bb"></li>
+								<li class="dd"></li>
+								<li class="cc">2.确定发票信息和地址</li>
+							</ul>	
+						</div>
+						
+					</div>
+
+					<div class="content_left_two">
+						<div class="content_left_two_xinzeng">
+							<p>签票金额：
+								<a>￥123</a>(待开票金额大于零才可索取发票)&nbsp;&nbsp;
+								<a href="#" style="color: #00A2CA;">查看欠票</a>
+							</p>
+						</div>
+						<span>温馨提示:</span>
+						<div class="content_left_two_1">
+							<p>1. 后付费月结算单的可开票金额为当月实际结算金额。</p>
+							<p>2. 本月产生的后付费业务月结算单在下个月二号以后才可以索取发票。</p>
+							<p>3. 发票基于订单、月结算单开具（单个订单、月结算单不可拆分开票）。</p>
+							<p>4. 阿里云自2016.10.01日起，将发票开票内容由原"技术服务费"调整为"软件服务费"。</p>
+							<p>5. 单次索取发票金额不能超过100万。</p>
+							<p>6. 您设置的企业类发票抬头，将锁定为您资金提现的户名。
+								<a href="#">提现规则详情</a>
+							</p>
+						</div>
+					</div>
+
+					<div class="content_left_three">
+						<span>可开票订单/月账单列表</span>
+						<div class="content_dianji"></div>
+					</div>
+
+					<div class="conten_bottom">
+						<div class="content_left_four">
+							<div class="content_left_four_1">
+								<form action="###" id="form1">
+									<div class="conten_time">
+										订单成功时间：<input style="width: 100px;height: 20px;color: #666666;" onClick="laydate()">&nbsp;至&nbsp;<input style="width: 100px;height: 20px;color: #666666;" id="demo">
+									</div>
+									<div class="conten_number">
+										可开票金额：<input style="width: 60px;height: 20px;color: #666666;" type="number">&nbsp;-&nbsp;<input style="width: 60px;height: 20px;color: #666666;" type="number">
+									</div>
+									<div class="content_source">
+										<span>来源：</span>
+										<select style="width: 72px;height: 24px; color: #666666;font-size: 14px; ">
+											<option value="1">阿里云</option>
+											<option value="2">聚石场</option>
+											<option value="3">云市场</option>
+										</select>
+									</div>
+									<input class="content_submit" type="submit" value="提交">
+								</form>
+							</div>
+							<div class="content_left_four_2">
+								<div class="left_four_2_left">
+									<p style="font-size: 12px;color: black;">已选总金额:<span style="font-size: 12px;color: #F32043;">￥0.00</span></p>
+									<p>（可开票总金额：￥0.00）</p>
+								</div>
+								<div class="left_four_2_conghe">
+									<div class="left_four_2_right">
+										<p style="font-size: 12px;color: black;">待开票金额 ：<span style="font-size: 12px;color: forestgreen;">￥0.00</span></p>
+										<p>（待开票金额 = 已选金额：￥0.00 - 欠票金额：￥0.00）</p>
+										<p>无法开票原因 </p>
+									</div>
+									<button class="left_four_2_button1">索取发票</button>
+								</div>
+							</div>
+							<!--<div >
+					    		<span>111111</span>
+					    		<div>￥0.00</div>
+					    		<div>（可开票总金额：￥0.00）</div>
+					        </div>-->
+						</div>
+
+						<div class="content_left_five">
+							<div class="content_left_five_1">
+								<a href="##">全部</a>
+								<span>|</span>
+								<a href="##">订单排序</a>
+								<span>|</span>
+								<a href="##">月结算单排序</a>
+							</div>
+							<div class="content_left_five_2">
+								<button>上一页</button>
+								<button>下一页</button>
+							</div>
+						</div>
+						<div class="content_left_six">
+							<div class="conten_bottom">
+								<table border="0" cellspacing="0" cellpadding="0">
+									<tr bgcolor="#F5F6FA" class="title">
+										<th>订单号</th>
+										<th>产品名称</th>
+										<th>类型</th>
+										<th>订单实付金额</th>
+										<th>可开票金额</th>
+										<th>订单支付时间</th>
+									</tr>
+									<tr>
+										<td class="price">123456789123456</td>
+										<td>性能测试资源包（包月）</td>
+										<td>订单</td>
+										<td>￥10000.00</td>
+										<td>￥10000.00</td>
+										<td style="width: 100px;">2017-01-10<br>10:30:23</td>
+									</tr>
+									<tr>
+										<td class="price">123456789123456</td>
+										<td>性能测试资源包（包月）</td>
+										<td>订单</td>
+										<td>￥10000.00</td>
+										<td>￥10000.00</td>
+										<td style="width: 100px;">2017-01-10<br>10:30:23</td>
+									</tr>
+									<tr>
+										<td class="price">123456789123456</td>
+										<td>性能测试资源包（包月）</td>
+										<td>订单</td>
+										<td>￥10000.00</td>
+										<td>￥10000.00</td>
+										<td style="width: 100px;">2017-01-10<br>10:30:23</td>
+									</tr>
+									<tr>
+										<td class="price">123456789123456</td>
+										<td>性能测试资源包（包月）</td>
+										<td>订单</td>
+										<td>￥10000.00</td>
+										<td>￥10000.00</td>
+										<td style="width: 100px;">2017-01-10<br>10:30:23</td>
+									</tr>
+									
+								</table>
+							</div>
+						</div>
+					</div>
+
+				</li>
+				<!--<li class="content_right">
+					2
+				</li>-->
+			</div>
+
+		</div>
+	</body>
+	<script>
+		//			var arrTab = $('.tab>li');
+		//			//初始化显示指示条,且第一个tab导航背景与众不同
+		//			$().ready(function() {
+		//				$("#indicator").css({
+		//					left: arrTab.eq(0).position().left,
+		//					width: arrTab.eq(0).outerWidth()+1,
+		//				});
+		//				//初始化第一个tab书签背景与众不同
+		//				arrTab.eq(0).addClass('choosed');
+		//				$(".content>li").eq(0).show().siblings().hide();
+		//			});
+		//			
+		//			//书签点击事件
+		//			arrTab.click(function() {
+		//				//获取当前点击的位置的索引下标
+		//				var index = $(this).index();
+		//				//显示当前点击对应索引下标的图片，并让同级其他的图片隐藏
+		//				$(".content>li").eq(index).show().siblings().hide();
+		//				//给当前点击对应下标的tab增加样式，并让同级其他tab移除样式
+		//				$(this).addClass('choosed').siblings().removeClass('choosed');
+		//				//修改指示条的位置
+		//				$("#indicator").css({
+		//					left: $(this).position().left,
+		//					width: $(this).outerWidth()+1,
+		//				});
+		//			});
+		//			
+
+		//点击切换
+		$(document).ready(function() {
+			$(".content_dianji").click(function() {
+				$(".conten_bottom").toggle();
+			});
+		});
+
+		//时间插件
+		! function() {
+			laydate({
+				elem: '#demo'
+			})
+		}();
+	</script>
+
+</html>

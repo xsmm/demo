@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>发票信息管理</title>
+	</head>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		html{
+			width: 100%;
+			font-size: 16px;
+		}
+		body{
+			width: 100%;
+			font-family: "微软雅黑";
+		}
+		li{
+			list-style: none;
+		}
+		a{
+			color: black;
+			text-decoration:none;
+		}
+		
+		.wrap{
+			width: 99%;
+			height: 500px;/*去除*/
+			
+			margin: 0 auto;
+		}
+		/*整体属性*/
+		.header{
+			width: 96%;
+			height: 70px;
+			margin: 0 auto;
+			border-bottom: solid 1px rgb(217,222,228);
+			position: relative;
+		}
+		.header_one{
+			border-left:solid 3px rgb(136,183,224);
+			position: relative;
+			top:16px;
+		}
+		.header_one span{
+			font-size: 14px;
+			margin-left: 10px;
+		}
+		
+		/*header属性*/
+		.title{
+			width: 96%;
+			height: 32px;
+			background: rgb(245,256,250);
+			margin: 0 auto;
+			margin-top: 25px;
+			border: solid 1px rgb(199,221,185);
+		}
+		.title .title_one{
+			color: rgb(0,150,0);
+			font-size: 12px;
+			line-height: 32px;
+			margin-left: 10px;
+		}
+		.title a{
+			float: right;
+			font-size: 12px;
+			color: rgb(0,51,153);
+			line-height: 32px;
+			margin-right: 10px;
+		}
+		.title a:hover{
+			text-decoration:underline;
+		}
+		/*title属性*/
+		.nav{
+			width: 96%;
+			height: 40px;
+			background: rgb(245,256,250);
+			margin: 0 auto;
+			margin-top: 25px;
+			border-left:3px solid rgb(109,119,129) ;
+		}
+		.nav_one{
+			font-size: 14px;
+			line-height: 40px;
+			margin-left: 10px;
+		}
+		.nav_two{
+			float: right;
+			font-size: 14px;
+			margin-right:10px ;
+			line-height: 40px;
+		}
+		.nav_two .nav_two_1 {
+			
+			border-right: solid 1px #666;
+		}
+		.nav_two_1 a{
+			font-size: 12px;
+			color: #666;	
+		}
+		.nav_two_1 a:hover{
+			color: rgb(0,51,153);
+			text-decoration:underline;
+		}
+		/*nav属性*/
+		.content{
+			width: 96.1%;
+			
+			background:#8A2BE2;
+			margin: 0 auto;
+			border: #ddd solid 1px;
+			border-top:none ;
+			background: white;
+			color: #666;
+			font-size: 14px;
+			
+		}
+		.content_one{
+			padding: 30px 0 30px 100px;
+		}
+		.content_one_1{
+			padding: 0 0 20px 0;
+		}
+		.content_one_1 span{
+			padding: 0 20px 0 0 ;
+		}
+		/*content属性*/
+	</style>
+	<body>
+		<div class="wrap">
+			<div class="header">
+				<div class="header_one"><span>发票信息管理</span></div>
+			</div>
+			<div class="title">
+				<span class="title_one">发票信息，有效！</span>
+				<a  href="#">修改发票信息？</a>
+			</div>
+			<div class="nav">
+				<span class="nav_one">发票信息</span>
+				<div class="nav_two">
+					<span class="nav_two_1"><a href="#">新手开票指南</a>&nbsp;&nbsp;</span>
+					<span class="nav_two_1"><a href="#">增值税转票样例</a>&nbsp;&nbsp;</span>
+					<span class="nav_two_1"><a href="#">增值税普票样例</a>&nbsp;&nbsp;</span>
+					<span class="nav_two_1" style="border: none;"><a href="#">发票常见问题</a>&nbsp;&nbsp;</span>
+				</div>
+			</div>
+			<div class="content">
+				<div class="content_one">
+					<div class="content_one_1"><span>发票抬头：</span><span>个人</span></div>
+					<div class="content_one_1"><span>开具类型：</span><span>个人</span></div>
+					<div class="content_one_1"><span>发票类型：</span><span>增值税普通发票</span></div>
+					
+				</div>
+			</div>
+			
+		</div>
+	</body>
+</html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>发票地址管理</title>
+		
+	</head>
+		<script src="libs/jquery-3.1.1.js"></script>
+		<script src="libs/laydate/laydate.js" type="text/javascript"></script>
+	<style rel="stylesheet">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		html,body{
+			width: 100%;
+			font-family: "微软雅黑";
+			font-size:14px;
+		}
+		li{
+			list-style: none;
+		}
+		a{
+			color: black;
+			text-decoration:none;
+		}
+		
+		.wrap{
+			width: 99%;
+			/*border:1px solid red;*/
+			margin: 0 auto;
+			position: relative;
+		}
+		/*整体属性*/
+		.nav{
+			width: 96%;
+			height: 70px;
+			margin: 0 auto;
+			border-bottom: solid 1px rgb(217,222,228);
+			position: relative;
+		}
+		.nav-title{
+			border-left:solid 3px rgb(136,183,224);
+			position: absolute;
+			top:16px;
+		}
+		.nav-title span{
+			font-size: 14px;
+			margin-left: 10px;
+		}
+		
+		
+		/*内容*/
+		.invoice-address{
+			width:96%;
+			font-size:12px;
+			color: #666666;
+			margin:30px auto;
+		}
+		.invoice-address .body{
+			border-top: 1px solid #e1e6eb;
+			border-right: 1px solid #e1e6eb;
+			border-left: 1px solid #e1e6eb;
+		}
+		.invoice-address table{
+			width:100%;
+		}
+		.invoice-address table tr th {
+		    padding: 8px 8px;
+		    font-weight: normal;
+		    text-align: left;
+		    color: #999;
+		    border-bottom: 1px solid #e1e6eb;
+		    background-color: #F5F6FA;
+		}
+		.invoice-address table tr td{
+		    padding: 8px 8px;
+		    color: #333;
+		    border-bottom: 1px solid #e1e6eb;
+		}
+		.invoice-address .content-hint{
+			height:200px;
+			font-size:18px;
+			color: #333333;
+			letter-spacing: 1.5px;
+			text-align: center;
+			line-height:200px;
+			border-bottom: 1px solid #e1e6eb;
+			/*display:none;*/
+		}
+		.invoice-address .content-hint::before{
+			content:"\e630";
+			color:#0099cc;
+		}
+		.invoice-address .content-hint a{
+			color:#06C;
+			cursor: pointer;
+			margin-left:5px;
+		}
+		/*管理发票地址*/
+		.invoice-address a{
+			color:#06C;
+		}
+		.invoice-address .handle .checked{
+			display: inline-block;
+			padding:0 5px;
+			border:1px solid #e5e5e5;
+		}
+		.invoice-address .add-hint{
+			margin-top:20px;
+		}
+		
+		/*添加发票地址*/
+		.address-add{
+			width:100%;
+			height:100%;
+			background:rgba(0,0,0,0.03);
+			position:fixed;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			display: none;
+		}
+		.address-add .address-model{
+			width:600px;
+			color: #000000;
+			background:#fff;
+			margin:30px auto;
+			border: 1px solid rgba(0,0,0,0.3);
+    		box-shadow: 0px 5px 10px rgba(0,0,0,0.5);
+		}
+		.address-add .address-model .model-header{
+			padding: 15px;
+    		border-bottom: 1px solid #e5e5e5;
+		}
+		.model-header .close{
+			font-size:30px;
+			opacity: 0.2;
+			padding: 0;
+			background: #fff;
+			cursor: pointer;
+			border: 0;
+   			margin-top: -8px;
+    		font-weight: normal
+		    -webkit-appearance: none;
+		    float:right;
+		}
+		.address-add .address-form .form-content{
+			padding: 20px;
+		}
+		.address-form .form-group{
+			padding:8px 0;
+		}
+		.address-form .form-group div{
+			display:inline-block;
+		}
+		.address-form .form-group div p{
+			margin-top:3px;
+			color:#E40;
+		}
+		.address-form .form-group .label::before{
+			content:"*";
+			color:  #F00;
+			margin-right:5px;
+		}
+		.address-form .form-group label{
+			display: inline-block;
+			width:100px;
+			color: #666;
+			text-align: right;
+			vertical-align: top;
+			padding-top:7px;
+			padding-right: 15px;
+    		padding-left: 15px
+		}
+		.address-form .form-group #text0,
+		.address-form .form-group #text2,
+		.address-form .form-group #text3{
+			height:28px;
+		}
+		.address-form .form-group #text1{
+			width:360px;
+			height:28px;
+		}
+		.address-form .form-group select{
+			width:80px;
+			height:32px;
+			color: #555555;
+			border-radius: 0px;
+    		padding: 6px;
+			margin-right:5px;
+		}
+		
+		.address-form .model-footer{
+			padding: 19px 20px 20px;
+			text-align: right;
+			border-top: 1px solid #e5e5e5;
+		}
+		.address-form .model-footer button{
+			padding: 8px 16px;
+    		height: 32px;
+    		cursor:pointer;
+		}
+		.address-form .model-footer .btn-promit{
+			opacity: 1;
+		    color: #fff;
+		    border: 1px solid #ccc;
+		    background-color: #ccc;
+		}
+		.address-form .model-footer .btn-default{
+			color: #333;
+    		border: 1px solid #ddd;
+   			background-color: #f7f7f7;
+   			margin-left:5px;
+		}
+		
+		
+		
+		
+		
+		</style>
+	<body>
+		<section class="wrap">
+			<nav class="nav">
+				<div class="nav-title"><span>发票寄送地址管理</span></div>
+			</nav>
+			<main class="invoice-address">
+				<div class="body">
+					<table border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<th>收件人姓名</th>
+							<th>电话号码</th>
+							<th>地址</th>
+							<th>邮编</th>
+							<th style="text-align: right;">操作</th>
+						</tr>
+						<tr>
+							<td>123</td>
+							<td>45678</td>
+							<td>北京市朝阳区</td>
+							<td>123456</td>
+							<td style="text-align: right;" class="handle">
+								<span class="checked">设为默认</span>
+								<a class="change">修改</a>
+								|
+								<a class="dele">删除</a>
+							</td>
+						</tr>
+					</table>
+					<div class="content-hint"><span>您还没有地址信息</span><a>立即设置</a></div>
+				</div>
+				<div class="add-hint"><a>+新增地址</a>&nbsp;&nbsp;(最多保存5个地址)</div>
+				<section class="address-add">
+					<div class="address-model">
+						<form action="###" method="get" class="address-form">
+							<div class="model-header">新增地址<button class="close" type="reset">×</button></div>
+							<div class="form-content">
+								<div class="form-group">
+									<label for="text0" class="label">收件人名字:</label>
+									<div>
+										<input type="text" name="text0" id="text0" value="" />
+										<p></p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="label">所在地址:</label>
+									<div>
+										<select id="s_province" name="s_province"></select>  
+										<select id="s_city" name="s_city" ></select>  
+										<select id="s_county" name="s_county"></select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="text1" class="label">街道地址:</label>
+									<input type="text" name="text1" id="text1" value="" />
+								</div>
+								<div class="form-group">
+									<label for="text2" class="label">邮政编码:</label>
+									<div>
+										<input type="text" name="text2" id="text2" value="" />
+										<p></p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="text3" class="label">手机号:</label>
+									<div>
+										<input type="text" name="text3" id="text3" value="" />
+										<p></p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label></label>
+									<input type="checkbox"/>&nbsp设为默认
+								</div>
+							</div>	
+							<div class="model-footer">
+								<button class="btn-promit" disabled="disabled">确认</button>
+								<button class="btn-default" type="reset">取消</button>
+							</div>
+						</form>
+						
+					</div>
+				</section>
+			</main>
+			
+		</section>
+		
+	</body>
+	<script src="libs/jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+	<script src="libs/area.js" type="text/javascript"></script>
+	<script>	
+
+	$(function(){
+		
+		//显示新增地址模块
+		$('.content-hint>a').click(function(){
+			$('.address-add').slideDown(500);
+		});
+		
+		//隐藏新增地址模块
+		$(".close").click(function(){
+			resetCss();
+			$('.address-add').slideUp(500);
+		});
+		$(".btn-default").click(function(){
+			resetCss();
+			$('.address-add').slideUp(500);
+		});
+		
+		//省市县
+		_init_area();
+	
+		
+		//正则验证收件人名字
+		$('.form-group').find('#text0').keyup(function(){
+			checkName()
+		})
+		//验证街道地址是否为空
+		$('.form-group').find('#text1').keyup(function(){
+			checkAdress()
+		})
+		
+		//正则验证邮政编码
+		$('.form-group').find('#text2').keyup(function(){
+			checkPostal()
+		})
+		//正则验证手机号码
+		$('.form-group').find('#text3').keyup(function(){
+			checkPhone()
+		})
+		
+		
+		function resetCss(){
+			$('.address-form input').css({
+				color:"#666",
+				border:"",
+			})
+			$('.address-form input').next().html("");
+			$('.address-form input').parent().prev().css("color","#666")
+			$('.address-form #text1').prev().css("color","#666")
+		}
+		
+		function checkName(){
+			var name = $('.form-group').find('#text0').val();
+			var reg = /^[\u4e00-\u9fa5]{2,10}$/;
+			var flag = reg.test(name);
+			var getName = $('.form-group').find('#text0')
+			if(flag){
+				getName.css("border","");
+				getName.next().html('');
+				getName.parent().prev().css({
+					color:'#666',
+				});
+			}else{
+				getName.css("border","1px solid #E40");
+				getName.next().html('收件人长度为2到50');
+				getName.parent().prev().css({
+					color:'#E40',
+				});
+			}
+			return flag;
+		}
+		function checkAdress(){
+			var addressInput =$('.form-group').find('#text1')
+			var adress = addressInput.val();
+			var bol = true;
+			if(adress == ""){
+				addressInput.css("border","1px solid #E40")
+				addressInput.prev().css({
+					color:'#E40',
+				});
+				bol = false;
+			}else{
+				addressInput.css("border","")
+				addressInput.prev().css({
+					color:'#666',
+				});
+				bol = true;
+			}
+			console.log(bol)
+			return bol;
+		}
+		function checkPostal(){
+			var postal = $('.form-group').find('#text2').val();
+			var reg = /^\d{6}$/;
+			var flag = reg.test(postal);
+			var postalN = $('.form-group').find('#text2')
+			if(flag){
+				postalN.css("border","")
+				postalN.next().html('');
+				postalN.parent().prev().css({
+					color:'#666',
+				});
+			}else{
+				postalN.css("border","1px solid #E40")
+				postalN.next().html('邮政号码必须为6位数字');
+				postalN.parent().prev().css({
+					color:'#E40',
+				});
+			}
+			return flag;
+		}
+		
+		function checkPhone(){
+			var phone = $('.form-group').find('#text3').val();
+			var reg = /^\d{6,15}$/;
+			var flag = reg.test(phone);
+			var phoneNum = $('.form-group').find('#text3')
+			if(flag){
+				phoneNum.css("border","")
+				phoneNum.next().html('');
+				phoneNum.parent().prev().css({
+					color:'#666',
+				});
+			}else{
+				phoneNum.css("border","1px solid #E40")
+				phoneNum.next().html('手机号码长度为6至15数字');
+				phoneNum.parent().prev().css({
+					color:'#E40',
+				});
+			}
+			return flag;
+		}
+		
+		
+	})
+	
+	</script>
+</html>
